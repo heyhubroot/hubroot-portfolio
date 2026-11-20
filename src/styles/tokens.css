@@ -1,0 +1,125 @@
+/* ==========================================================================
+   DESIGN TOKENS · Operations Blueprint
+   Light is the default. Dark is tuned separately (warm charcoal, not inverted).
+   "system" tokens drive the control-room sections that stay dark in both themes.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* surfaces */
+  --paper: #f5f2eb;
+  --surface: #ffffff;
+  --surface-2: #faf8f3;
+  --surface-sunk: #eeeae1;
+
+  /* ink */
+  --ink: #16171a;
+  --ink-2: #45474d;
+  --ink-3: #66686e;
+  --ink-inverse: #f5f2eb;
+
+  /* lines */
+  --line: #e2ddd2;
+  --line-strong: #cbc4b5;
+
+  /* the one technical accent: blueprint blue */
+  --accent: #2443c2;
+  --accent-hover: #1b35a3;
+  --accent-ink: #ffffff;
+  --accent-soft: #e8ecfa;
+  --accent-line: #b9c4ef;
+
+  /* semantic (always paired with icon + text, never colour alone) */
+  --exception: #a8481a;
+  --exception-soft: #f8eae0;
+  --exception-line: #e8c2a8;
+  --human: #1d6f52;
+  --human-soft: #e1f0e8;
+  --human-line: #b4d8c6;
+  --live: #1d6f52;
+
+  /* control-room / system view */
+  --sys-bg: #111317;
+  --sys-surface: #191c21;
+  --sys-surface-2: #20242a;
+  --sys-line: #2c3038;
+  --sys-ink: #ebe8e1;
+  --sys-ink-2: #a9acb3;
+  --sys-accent: #93a6ff;
+  --sys-exception: #f2a271;
+  --sys-human: #72d3a8;
+  --sys-grid: rgba(147, 166, 255, 0.06);
+
+  /* type */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-instrument), "Iowan Old Style", Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1.07rem + 0.3vw, 1.3125rem);
+  --step-2: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
+  --step-3: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
+  --step-4: clamp(2.25rem, 1.8rem + 2.2vw, 3.75rem);
+  --step-5: clamp(2.75rem, 2rem + 3.6vw, 5.25rem);
+
+  /* space + shape */
+  --gutter: clamp(16px, 4vw, 40px);
+  --section: clamp(72px, 10vw, 136px);
+  --radius-s: 4px;
+  --radius: 8px;
+  --radius-l: 12px;
+  --measure: 68ch;
+  --shadow-1: 0 1px 0 rgba(22, 23, 26, 0.04), 0 1px 2px rgba(22, 23, 26, 0.04);
+  --shadow-2: 0 1px 0 rgba(22, 23, 26, 0.04), 0 8px 24px -12px rgba(22, 23, 26, 0.18);
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 150ms;
+  --t: 240ms;
+  --t-slow: 520ms;
+
+  --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+}
+
+/* Dark: tuned, not inverted. Warm charcoal paper, slightly lifted surfaces. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #121314;
+  --surface: #191a1c;
+  --surface-2: #1d1e21;
+  --surface-sunk: #0e0f10;
+
+  --ink: #ece9e2;
+  --ink-2: #bcb9b1;
+  --ink-3: #94918a;
+  --ink-inverse: #16171a;
+
+  --line: #2a2b2f;
+  --line-strong: #3a3b40;
+
+  --accent: #93a6ff;
+  --accent-hover: #b0beff;
+  --accent-ink: #0f1220;
+  --accent-soft: rgba(147, 166, 255, 0.12);
+  --accent-line: rgba(147, 166, 255, 0.35);
+
+  --exception: #f2a271;
+  --exception-soft: rgba(242, 162, 113, 0.1);
+  --exception-line: rgba(242, 162, 113, 0.35);
+  --human: #72d3a8;
+  --human-soft: rgba(114, 211, 168, 0.1);
+  --human-line: rgba(114, 211, 168, 0.32);
+  --live: #72d3a8;
+
+  --sys-bg: #0b0c0e;
+  --sys-surface: #141619;
+  --sys-surface-2: #1a1d21;
+  --sys-line: #262a31;
+  --sys-grid: rgba(147, 166, 255, 0.07);
+
+  --shadow-1: 0 0 0 1px rgba(255, 255, 255, 0.02);
+  --shadow-2: 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+}
