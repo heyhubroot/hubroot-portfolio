@@ -3,6 +3,8 @@ import type { ServiceId, ToolId } from "./types";
 export type Service = {
   id: ServiceId;
   name: string;
+  /** the outcome, as a client would say it. Used as the headline on cards. */
+  promise: string;
   /** the operational problem, in the buyer's words */
   problem: string;
   /** the system I build for it */
@@ -15,6 +17,7 @@ export type Service = {
 export const services: Service[] = [
   {
     id: "booking",
+    promise: "Every enquiry answered and booked, even on your busiest day.",
     name: "Lead Qualification & Appointment Booking",
     problem:
       "People message you to book and somebody has to reply, check the calendar, go back and forth, then remember to confirm. Some of them just stop replying because nobody answered fast enough.",
@@ -25,6 +28,7 @@ export const services: Service[] = [
   },
   {
     id: "outreach",
+    promise: "Prospects researched and first drafts written before your team sits down.",
     name: "Sales & Outreach Automation",
     problem:
       "Prospect lists live in a sheet, research is manual, and every email is either copy-pasted generic or takes ten minutes to write.",
@@ -35,6 +39,7 @@ export const services: Service[] = [
   },
   {
     id: "support",
+    promise: "Routine questions answered. Urgent ones handed to a person with the context attached.",
     name: "Customer Support Automation",
     problem:
       "The same questions keep coming in, the answers live in somebody’s head or a scattered doc, and urgent issues get buried under the easy ones.",
@@ -45,6 +50,7 @@ export const services: Service[] = [
   },
   {
     id: "ecommerce",
+    promise: "Every order tracked from checkout to doorstep, without the chasing.",
     name: "E-commerce Operations Automation",
     problem:
       "Orders, riders, delivery updates and returns are tracked across chats and spreadsheets, so customers ask “where is my order?” and nobody is sure.",
@@ -55,6 +61,7 @@ export const services: Service[] = [
   },
   {
     id: "recruitment",
+    promise: "Candidates moving forward instead of waiting in someone’s inbox.",
     name: "Recruitment & HR Automation",
     problem:
       "Applications come from everywhere, candidate status lives in someone’s inbox, and recruiters spend more time updating trackers than talking to people.",
@@ -65,6 +72,7 @@ export const services: Service[] = [
   },
   {
     id: "backoffice",
+    promise: "Documents read, checked and routed without anyone re-typing them.",
     name: "Document & Back-office Automation",
     problem:
       "Invoices and documents are read and re-typed by hand, matched against POs by eye, and approvals get stuck in someone’s inbox.",
@@ -75,6 +83,7 @@ export const services: Service[] = [
   },
   {
     id: "internal-tools",
+    promise: "Small tools built around how your team actually works.",
     name: "Custom AI Internal Tools",
     problem:
       "Your team needs a small tool that fits exactly how you work, and off-the-shelf software is either too much or not quite it.",

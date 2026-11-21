@@ -13,7 +13,7 @@ export const site = {
   tagline: "AI Systems Builder for business operations",
   url: "https://hubroot.example", // TODO: replace with the real domain once deployed (used for metadata only)
   description:
-    "I design and build AI-powered automation systems that remove repetitive operational work, around the tools a business already uses.",
+    "Workflow automation and AI systems that take repetitive operational work off your team: enquiries, follow-ups, orders, documents and handoffs, built around the tools you already use.",
   contact: {
     email: "adeshokanabdullahi@gmail.com",
     x: { handle: "@hubrootbuilds", url: "https://x.com/hubrootbuilds" },
@@ -25,7 +25,7 @@ export const site = {
     alt: "Portrait of Hubroot",
   },
   primaryCta: {
-    label: "Tell me what you’re trying to automate",
+    label: "Start a project",
     href: "/contact#start",
   },
 } as const;
@@ -43,7 +43,7 @@ export function contactOptions({ includeForm = true } = {}): ContactOption[] {
   const { email, x, calendarUrl } = site.contact;
   const options: ContactOption[] = [];
   if (includeForm)
-    options.push({ id: "form", label: site.primaryCta.label, meta: "short form · 2 mins", href: site.primaryCta.href });
+    options.push({ id: "form", label: site.primaryCta.label, meta: "2-minute form · I reply by email", href: site.primaryCta.href });
   if (calendarUrl)
     options.push({ id: "calendar", label: "Book a call", meta: "calendar", href: calendarUrl, external: true });
   options.push({ id: "email", label: "Email me", meta: email, href: `mailto:${email}` });

@@ -774,7 +774,7 @@
 .hero__copy {
   position: relative;
   z-index: 1;
-  max-width: 920px;
+  max-width: 1160px;
   margin-inline: auto;
   display: grid;
   justify-items: center;
@@ -782,7 +782,7 @@
 }
 .hero__title {
   margin-top: 28px;
-  font-size: clamp(2.5rem, 1.2rem + 4.2vw, 4.75rem);
+  font-size: clamp(2.5rem, 1.2rem + 4vw, 4.5rem);
   line-height: 1.04;
   letter-spacing: -0.045em;
   max-width: 14ch;
@@ -4112,4 +4112,109 @@
   line-height: 0.9;
   letter-spacing: -0.06em;
   color: var(--accent);
+}
+
+/* ==========================================================================
+   HERO · rotating phrase + CTA grouping
+   ========================================================================== */
+
+.rotator {
+  display: inline-block;
+}
+/* all options share one cell, so the slot is always as wide as the longest: no layout shift */
+.rotator__slot {
+  display: inline-grid;
+  vertical-align: bottom;
+  text-align: left;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+  overflow: hidden;
+}
+.rotator__item {
+  grid-area: 1 / 1;
+  justify-self: start;
+  position: relative;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-0.45em);
+  filter: blur(6px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), filter 0.45s var(--ease);
+}
+.rotator__item.is-on {
+  opacity: 1;
+  transform: none;
+  filter: none;
+  animation: hb-rotate-in 0.7s var(--ease-out) both;
+}
+.rotator__item.is-on::after {
+  content: "";
+  position: absolute;
+  left: 0.04em;
+  right: 0.04em;
+  bottom: 0.02em;
+  height: 0.09em;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--live) 55%, transparent);
+  transform-origin: left;
+  animation: hb-rotate-mark 0.9s var(--ease-out) 0.25s both;
+}
+@keyframes hb-rotate-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes hb-rotate-mark {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+/* the first phrase arrives with the headline's word rise */
+.hero__title .rotator {
+  animation: hb-word 1.1s var(--ease-out) 0.65s both;
+}
+
+.hero__cta {
+  margin-top: 40px;
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+}
+.hero__cta .hero__actions {
+  margin-top: 0;
+}
+.hero__note {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-3);
+  animation: hb-rise 0.9s var(--ease-out) 1.1s both;
+}
+.hero__note svg {
+  color: var(--accent);
+}
+.hero__cta + .hero__facts {
+  margin-top: 40px;
+}
+.svc-card__k {
+  margin-top: 4px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tint-ink);
+}
+.svc-card__k + .svc-card__name {
+  margin-top: -4px;
 }

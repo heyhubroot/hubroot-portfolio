@@ -43,9 +43,11 @@ export default function ServicesPage() {
             return (
               <article key={s.id} className={`svc tint--${tints[i % tints.length]}`} id={s.id} aria-labelledby={`svc-${s.id}`} data-reveal>
                 <div className="svc__col svc__head">
-                  <span className="svc__n">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="svc__n">
+                    {String(i + 1).padStart(2, "0")} · {s.name}
+                  </span>
                   <h2 id={`svc-${s.id}`} className="svc__name">
-                    {s.name}
+                    {s.promise}
                   </h2>
                   <ul role="list" className="svc__tools" aria-label="Typical tools">
                     {s.tools.map((t) => (

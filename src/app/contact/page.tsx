@@ -17,10 +17,10 @@ export default function ContactPage() {
         eyebrow="Contact · start a project"
         title={
           <>
-            Tell me what you’re <em>trying to automate.</em>
+            Let’s find the work <em>you shouldn’t be doing by hand.</em>
           </>
         }
-        lede="You don’t need to know the technical side. Just describe what happens now and what’s annoying about it. A few sentences is plenty."
+        lede="You don’t need to know the technical side. Describe what happens now and where it gets stuck. A few sentences is plenty, and I’ll come back with questions or a clear next step."
       />
 
       <section className="section section--tight section--band" id="start" aria-label="Project form">

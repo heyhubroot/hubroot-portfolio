@@ -44,7 +44,7 @@ export function ContactOptions({ includeForm = true, variant = "row" }: { includ
 export function CtaBlock({
   eyebrow = "Next step",
   title,
-  body = "Describe the workflow in your own words. What happens now, where it hurts, which tools are involved. I’ll read it and get back to you.",
+  body = "Describe it in plain words: what happens now, where it gets stuck, which tools are involved. I’ll tell you honestly whether automation is the right fix, and what I’d build.",
 }: {
   eyebrow?: string;
   title?: React.ReactNode;
@@ -61,14 +61,14 @@ export function CtaBlock({
           <h2 id="cta-title" className="display cta__title">
             {title ?? (
               <>
-                Tell me what you’re <em>trying to automate.</em>
+                Show me the process <em>that’s slowing you down.</em>
               </>
             )}
           </h2>
           <p className="lede cta__body">{body}</p>
           <div className="cta__actions">
             <Link href={site.primaryCta.href} className="btn btn--primary btn--lg">
-              {site.primaryCta.label} <ArrowIcon />
+              Start a project <ArrowIcon />
             </Link>
           </div>
           <div className="cta__direct">

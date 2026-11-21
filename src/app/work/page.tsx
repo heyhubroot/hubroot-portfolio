@@ -17,10 +17,10 @@ export default function WorkPage() {
         eyebrow="Work · case studies"
         title={
           <>
-            The systems, <em>and the state they’re in.</em>
+            The problems, <em>and the systems I built for them.</em>
           </>
         }
-        lede="Some of these are running for clients. Some are completed builds. Some are prototypes and demos where I was testing an idea. Each one is labelled honestly, and each one shows the full workflow, including the failure paths and where a person steps in."
+        lede="Bookings, outreach, orders, returns, support, hiring. Each case study shows the problem, the system I built, what happens when something fails, and where it stands today. Some run for clients, some are finished builds, some are prototypes, and each is labelled as exactly that."
       >
         <ul role="list" className="hero__facts" style={{ marginTop: 24, animation: "none" }}>
           <li>

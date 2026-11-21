@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { site } from "@/config/site";
 import { featuredProjects, getProject, sortedProjects } from "@/data/projects";
-import { services } from "@/data/services";
+import { services, serviceShort } from "@/data/services";
 import { faqs, problems, processSteps, reliabilityPillars } from "@/data/content";
 import { ORBIT, tools } from "@/data/tools";
 import type { ServiceId } from "@/data/types";
@@ -13,7 +13,7 @@ import { CtaBlock } from "@/components/CtaBlock";
 import { Portrait } from "@/components/Portrait";
 import { HeroSystem } from "@/components/HeroSystem";
 import { ProcessTabs } from "@/components/ProcessTabs";
-import { Words } from "@/components/Reveal";
+import { Rotator, Words } from "@/components/Reveal";
 import { ArrowIcon, CalendarIcon, FormIcon, MailIcon, NodeGlyph, ToolIcon } from "@/components/icons";
 
 /** Each service gets a tint + a glyph, so the grid reads as categories, not identical boxes. */
@@ -26,6 +26,9 @@ const serviceLook: Record<ServiceId, { tint: string; icon: React.ReactNode }> = 
   backoffice: { tint: "sky", icon: <ToolIcon id="docs" size={20} title="" /> },
   "internal-tools": { tint: "indigo", icon: <NodeGlyph kind="ai" size={20} /> },
 };
+
+/** Each one names a real operational pain: manual data, forgotten follow-ups, lost hours, no visibility, key-person risk. */
+const HERO_ROTATE = ["copy-paste.", "memory.", "overtime.", "guesswork.", "one person."];
 
 const pillarTint = { exception: "amber", human: "mint", monitoring: "indigo", database: "sky" } as const;
 
@@ -50,22 +53,34 @@ export default function Home() {
           <div className="hero__copy">
             <p className="eyebrow-pill hero__eyebrow">
               <span className="eyebrow-pill__dot" aria-hidden="true" />
-              {site.title}
+              Business systems · AI automation
             </p>
             <h1 id="hero-title" className="display hero__title">
-              <Words text="Stop doing it all by hand." step={0.07} />{" "}
-              <Words text="Let systems do the work." start={0.5} step={0.08} accent />
+              <Words text="Run your business on systems," step={0.07} />
+              <Words
+                text="not on"
+                start={0.45}
+                step={0.08}
+                accent
+                after={<Rotator items={HERO_ROTATE} label="copy-paste, memory, overtime, guesswork or one person." />}
+              />
             </h1>
             <p className="hero__sub">
-              I build AI automation around the tools you already use, with a person stepping in when it matters.
+              I build the workflows and AI systems that answer enquiries, send follow-ups and move data between your
+              tools, so your team only steps in where judgment matters.
             </p>
-            <div className="hero__actions">
-              <Link href={site.primaryCta.href} className="btn btn--primary btn--lg">
-                Start a project <ArrowIcon />
-              </Link>
-              <Link href="/work" className="btn btn--soft btn--lg">
-                See the work <ArrowIcon />
-              </Link>
+            <div className="hero__cta">
+              <div className="hero__actions">
+                <Link href={site.primaryCta.href} className="btn btn--primary btn--lg">
+                  Start a project <ArrowIcon />
+                </Link>
+                <Link href="/work" className="btn btn--soft btn--lg">
+                  See what I’ve built <ArrowIcon />
+                </Link>
+              </div>
+              <p className="hero__note">
+                <FormIcon size={14} /> A 2-minute form. I reply by email.
+              </p>
             </div>
             <ul role="list" className="hero__facts">
               <li>
@@ -76,7 +91,7 @@ export default function Home() {
                 <span className="hero__fact-n">{liveCount}</span> in real use
               </li>
               <li>
-                <NodeGlyph kind="human" size={16} /> Human handoffs built in
+                <NodeGlyph kind="human" size={16} /> A person in the loop where it counts
               </li>
             </ul>
           </div>
@@ -114,8 +129,8 @@ export default function Home() {
                 The work that quietly <em>eats your week.</em>
               </h2>
               <p className="split__intro">
-                None of these is a big dramatic problem. They just keep happening, every day, and somebody on your team is
-                always the one covering for them.
+                None of these is a crisis on its own. They just happen every day, and someone on your team pays for them in
+                hours that should have gone into the actual business.
               </p>
             </div>
           </div>
@@ -143,10 +158,10 @@ export default function Home() {
             id="build-title"
             title={
               <>
-                Systems for specific <em>parts of the business.</em>
+                Start with the part of the business <em>that keeps breaking.</em>
               </>
             }
-            intro="I don’t sell tools. I look at one workflow, work out where it breaks, and build the system that runs it properly."
+            intro="Each system covers one workflow end to end: where the work comes in, where it stalls, and who ends up chasing it. The tools are whatever fits your business. What matters is that it runs."
           />
           <ul role="list" className="svc-grid">
             {services.map((s, i) => {
@@ -154,7 +169,8 @@ export default function Home() {
               return (
                 <li key={s.id} className={`svc-card tint--${look.tint}`} data-reveal style={{ ["--reveal-delay" as string]: `${(i % 4) * 0.06}s` }}>
                   <span className="svc-card__icon">{look.icon}</span>
-                  <h3 className="svc-card__name">{s.name}</h3>
+                  <p className="svc-card__k">{serviceShort[s.id]}</p>
+                  <h3 className="svc-card__name">{s.promise}</h3>
                   <p className="svc-card__problem">{s.problem}</p>
                   <ul role="list" className="svc-card__tools" aria-label="Typical tools">
                     {s.tools.slice(0, 4).map((t) => (
@@ -191,10 +207,10 @@ export default function Home() {
             id="work-title"
             title={
               <>
-                Things I’ve built, <em>and what state they’re in.</em>
+                Real systems, <em>honestly labelled.</em>
               </>
             }
-            intro="Every project has an honest status label. Some are running for clients, some are completed builds, some are prototypes. I’d rather you know which is which."
+            intro="Each one shows the problem, the system, what happens when something fails, and where it stands today: running for a client, a finished build, or a prototype I built to test an idea."
           />
           <ul role="list" className="work-bento">
             <li className="work-bento__lead" data-reveal>
@@ -331,18 +347,18 @@ export default function Home() {
               <span className="label__n">07</span>About
             </p>
             <h2 id="about-title" className="display h2">
-              Hi, I’m <em>Hubroot.</em>
+              I fix the work that happens <em>between your tools.</em>
             </h2>
             <div className="prose about-home__prose">
               <p>
-                I build automation systems for business operations. Booking flows, outreach pipelines, order tracking,
-                returns, support assistants, small internal tools. Most of them start with somebody on a team doing the same
-                thing by hand every day.
+                Most businesses don’t need more software. They need the tools they already pay for to work together, and
+                someone to design what happens between the steps: who gets told, what gets checked, where it goes when
+                something is off. That’s the part I build.
               </p>
               <p>
-                I care more about the system working on a bad day than looking good in a demo. So I spend a lot of time on
-                the boring parts: what happens when data is missing, when an API fails, when a customer says something the
-                bot doesn’t understand. Those are the bits that decide if people trust it.
+                I’m Hubroot, an AI automation engineer. I care more about a system working on a bad day than looking good in
+                a demo, so missing data, failed APIs and confused customers get a planned path, and your team is brought in
+                exactly where judgment is needed.
               </p>
             </div>
             <ul role="list" className="tool-chips" aria-label="Tools I work with">

@@ -96,7 +96,7 @@ export default async function CaseStudy({ params }: Params) {
         {/* WHY IT MATTERED */}
         <section className="cs-block" aria-labelledby="why">
           <div className="cs-block__head">
-            <p className="label label--accent">01 · Why it mattered</p>
+            <p className="label label--accent">01 · The problem</p>
             <h2 id="why">What the manual way was costing</h2>
           </div>
           <ul role="list" className="bullets">
@@ -114,7 +114,7 @@ export default async function CaseStudy({ params }: Params) {
         {/* SYSTEM CONCEPT */}
         <section className="cs-block" aria-labelledby="concept">
           <div className="cs-block__head">
-            <p className="label label--accent">02 · System concept</p>
+            <p className="label label--accent">02 · The approach</p>
             <h2 id="concept">What I set out to build</h2>
           </div>
           <p className="cs-concept" data-reveal>
@@ -159,7 +159,7 @@ export default async function CaseStudy({ params }: Params) {
         {/* RELIABILITY LAYER */}
         <section className="cs-block" aria-labelledby="reliability">
           <div className="cs-block__head">
-            <p className="label label--accent">05 · Reliability layer</p>
+            <p className="label label--accent">05 · When things go wrong</p>
             <h2 id="reliability">What can go wrong, and who steps in</h2>
           </div>
           <div>
@@ -185,7 +185,7 @@ export default async function CaseStudy({ params }: Params) {
         {/* EVIDENCE */}
         <section className="cs-block" aria-labelledby="evidence">
           <div className="cs-block__head">
-            <p className="label label--accent">06 · Evidence</p>
+            <p className="label label--accent">06 · Where it stands</p>
             <h2 id="evidence">What exists today</h2>
           </div>
           <div>
@@ -201,7 +201,7 @@ export default async function CaseStudy({ params }: Params) {
         {/* WHAT THIS DEMONSTRATES */}
         <section className="cs-block" aria-labelledby="demo">
           <div className="cs-block__head">
-            <p className="label label--accent">07 · What this demonstrates</p>
+            <p className="label label--accent">07 · Why it matters</p>
             <h2 id="demo" className="sr-only">
               What this demonstrates
             </h2>
@@ -214,7 +214,7 @@ export default async function CaseStudy({ params }: Params) {
         {/* ARCHITECTURE + TECHNOLOGY (kept near the end on purpose) */}
         <section className="cs-block" aria-labelledby="stack">
           <div className="cs-block__head">
-            <p className="label label--accent">08 · Stack / integrations</p>
+            <p className="label label--accent">08 · Built with</p>
             <h2 id="stack">What it’s built with</h2>
           </div>
           <div>

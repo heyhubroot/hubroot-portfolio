@@ -23,7 +23,7 @@ export default function AboutPage() {
             I’m Hubroot. I build the systems <em>behind the busywork.</em>
           </>
         }
-        lede={`${site.title} · ${site.tagline}`}
+        lede="I help businesses hand their repetitive operational work to systems that run reliably, and bring people in only where judgment is needed."
       />
 
       <section className="section">
