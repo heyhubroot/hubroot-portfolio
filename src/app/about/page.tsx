@@ -5,6 +5,7 @@ import { sortedProjects } from "@/data/projects";
 import { Portrait } from "@/components/Portrait";
 import { CtaBlock, ContactOptions } from "@/components/CtaBlock";
 import { StatusBadge } from "@/components/StatusBadge";
+import { PageHero } from "@/components/Blocks";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,23 +16,36 @@ export default function AboutPage() {
   const live = sortedProjects.filter((p) => p.status.tier === "live");
   return (
     <>
-      <section className="section">
-        <div className="container about-grid">
-          <div>
-            <Portrait priority />
-          </div>
-          <div>
-            <p className="label">About</p>
-            <h1 className="display page-hero__title" style={{ fontSize: "var(--step-4)" }}>
-              I’m Hubroot. I build the systems <em>behind the busywork.</em>
-            </h1>
+      <PageHero
+        eyebrow="About"
+        title={
+          <>
+            I’m Hubroot. I build the systems <em>behind the busywork.</em>
+          </>
+        }
+        lede={`${site.title} · ${site.tagline}`}
+      />
 
+      <section className="section">
+        <div className="container about-page">
+          <div className="about-page__photo" data-reveal>
+            <Portrait priority />
+            <div className="name-card">
+              <span className="name-card__dot" aria-hidden="true" />
+              <span>
+                <strong>{site.name}</strong>
+                <span className="name-card__role">{site.title}</span>
+              </span>
+            </div>
+          </div>
+
+          <div data-reveal style={{ ["--reveal-delay" as string]: "0.1s" }}>
             {/*
               NOTE FOR HUBROOT: this copy is a starting draft written from the brief.
               Replace it with your own words: how you got into this, what you were doing before,
               a real story from a build. Keep it in your voice, it can be informal.
             */}
-            <div className="prose" style={{ marginTop: 32 }}>
+            <div className="prose about-page__prose">
               <p>
                 I’m an AI automation engineer. In plain terms, I look at the repetitive work that keeps a business running,
                 the booking replies, the follow-ups, the copy-pasting between sheets, and I build systems that do it
@@ -57,7 +71,9 @@ export default function AboutPage() {
             <dl className="facts">
               <div>
                 <dt>Role</dt>
-                <dd>{site.title} · {site.tagline}</dd>
+                <dd>
+                  {site.title} · {site.tagline}
+                </dd>
               </div>
               <div>
                 <dt>Systems built</dt>
@@ -65,7 +81,7 @@ export default function AboutPage() {
                   {sortedProjects.length} documented on this site · <Link href="/work">see all</Link>
                 </dd>
               </div>
-              <div>
+              <div className="facts__wide">
                 <dt>In real use</dt>
                 <dd style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                   {live.map((p) => (
@@ -86,8 +102,8 @@ export default function AboutPage() {
               </div>
             </dl>
 
-            <div style={{ marginTop: 40 }}>
-              <p className="label" style={{ marginBottom: 12 }}>
+            <div className="aside-card" style={{ marginTop: 40 }}>
+              <p className="label label--accent" style={{ marginBottom: 16 }}>
                 Say hello
               </p>
               <ContactOptions variant="stack" />

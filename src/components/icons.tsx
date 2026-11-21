@@ -72,6 +72,13 @@ const genericPaths: Record<string, React.ReactNode> = {
   ),
 };
 
+function isDark(hex: string) {
+  const h = hex.replace("#", "");
+  if (h.length !== 6) return false;
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b < 60;
+}
+
 export function ToolIcon({
   id,
   size = 18,
@@ -90,16 +97,21 @@ export function ToolIcon({
   const label = title ?? tools[id]?.name ?? id;
   // title="" means decorative: the visible text next to it already names the tool
   const a11y = label ? { role: "img", "aria-label": label } : { "aria-hidden": true as const };
-  if (brand) {
+  // Cal.com's official mark is a wordmark, unreadable at icon sizes, so it gets a calendar glyph
+  if (id === "calcom") {
+    const ink = brandColor ? { stroke: "var(--brand-dark, #292929)" } : undefined;
     return (
-      <svg
-        viewBox="0 0 24 24"
-        width={size}
-        height={size}
-        className={className}
-        {...a11y}
-        fill={brandColor ? brand.hex : "currentColor"}
-      >
+      <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...a11y}>
+        <rect x="3.5" y="5" width="17" height="15" rx="3" {...stroke} style={ink} />
+        <path d="M3.5 10h17M8 3v4M16 3v4M8 14h3" {...stroke} style={ink} />
+      </svg>
+    );
+  }
+  if (brand) {
+    // near-black brand marks follow the text colour in dark mode (see --brand-dark in tokens.css)
+    const fill = !brandColor ? "currentColor" : isDark(brand.hex) ? `var(--brand-dark, ${brand.hex})` : brand.hex;
+    return (
+      <svg viewBox="0 0 24 24" width={size} height={size} className={className} {...a11y} style={{ fill }}>
         <path d={brand.path} />
       </svg>
     );

@@ -13,7 +13,8 @@
     "framer-motion": "^11.18.2",
     "next": "^15.5.4",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "resend": "^6.39.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

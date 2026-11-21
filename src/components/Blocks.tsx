@@ -1,34 +1,98 @@
 import type { Decision, ProjectMedia } from "@/data/types";
 import Image from "next/image";
 
-/** Section heading: mono index + display title + optional intro. Asymmetric on desktop. */
+/**
+ * Section heading.
+ * split (default): eyebrow + title on the left, intro on the right, bottoms aligned.
+ * center: centred stack, used on the deep showcase bands.
+ */
 export function SectionHead({
   index,
   label,
   title,
   intro,
   id,
+  align = "split",
 }: {
   index?: string;
   label: string;
   title: React.ReactNode;
   intro?: React.ReactNode;
   id?: string;
+  align?: "split" | "center";
 }) {
   return (
-    <header className="section-head">
-      <div className="section-head__meta">
-        <p className="label">
-          {index && <span className="label--accent">{index}</span>} {label}
-        </p>
-      </div>
+    <header className={`section-head${align === "center" ? " section-head--center" : ""}`} data-reveal>
       <div>
+        {align === "center" ? (
+          <p className="eyebrow-pill eyebrow-pill--glass">
+            {index && <span className="eyebrow-pill__n">{index}</span>}
+            {label}
+          </p>
+        ) : (
+          <p className="label label--accent">
+            {index && <span className="label__n">{index}</span>}
+            {label}
+          </p>
+        )}
         <h2 className="display h2 section-head__title" id={id}>
           {title}
         </h2>
-        {intro && <p className="section-head__intro">{intro}</p>}
+        {align === "center" && intro && <p className="section-head__intro">{intro}</p>}
       </div>
+      {align === "split" && intro && <p className="section-head__intro">{intro}</p>}
     </header>
+  );
+}
+
+/** Inner-page opener on the aurora wash: eyebrow pill, title left, lede (and optional aside) right. */
+export function PageHero({
+  eyebrow,
+  title,
+  lede,
+  children,
+}: {
+  eyebrow: string;
+  title: React.ReactNode;
+  lede?: React.ReactNode;
+  children?: React.ReactNode;
+}) {
+  return (
+    <section className="page-hero">
+      <div className="container page-hero__grid">
+        <div className="page-hero__main">
+          <p className="eyebrow-pill">
+            <span className="eyebrow-pill__dot" aria-hidden="true" />
+            {eyebrow}
+          </p>
+          <h1 className="display page-hero__title">{title}</h1>
+        </div>
+        {(lede || children) && (
+          <div className="page-hero__side">
+            {lede && <p className="lede">{lede}</p>}
+            {children}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/** App-window frame (AmpliQ's product-shot container), used to present live components. */
+export function Window({ title, meta, children, className = "" }: { title?: React.ReactNode; meta?: React.ReactNode; children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`window ${className}`}>
+      <div className="window__bar">
+        <span className="window__dots" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+        </span>
+        {title && <span className="window__addr">{title}</span>}
+        {meta && <span className="window__meta">{meta}</span>}
+      </div>
+      <div className="window__body">{children}</div>
+    </div>
   );
 }
 
@@ -39,7 +103,7 @@ export function Accordion({ items, className = "" }: { items: { q: string; a: Re
       {items.map((it, i) => (
         <details key={i} className="acc__item">
           <summary className="acc__sum">
-            <span className="mono acc__n">{String(i + 1).padStart(2, "0")}</span>
+            <span className="acc__n">{String(i + 1).padStart(2, "0")}</span>
             <span className="acc__q">{it.q}</span>
             <span className="acc__icon" aria-hidden="true" />
           </summary>
@@ -57,7 +121,7 @@ export function DecisionLog({ decisions }: { decisions: Decision[] }) {
       {decisions.map((d, i) => (
         <details key={i} className="acc__item" open={i === 0}>
           <summary className="acc__sum">
-            <span className="mono acc__n">D-{String(i + 1).padStart(2, "0")}</span>
+            <span className="acc__n">D{String(i + 1).padStart(2, "0")}</span>
             <span className="acc__q">{d.title}</span>
             <span className="acc__icon" aria-hidden="true" />
           </summary>
@@ -89,50 +153,5 @@ export function MediaEvidence({ media }: { media: ProjectMedia[] }) {
         </figure>
       ))}
     </div>
-  );
-}
-
-/** Subtle system motif for the hero: a small blueprint of a flow with one branch to a person. */
-export function HeroMotif() {
-  return (
-    <figure className="motif" aria-label="Diagram: a message comes in, gets sorted, booked and confirmed. Anything unclear branches off to a person.">
-      <svg viewBox="0 0 420 300" className="motif__svg" aria-hidden="true">
-        <defs>
-          <pattern id="mgrid" width="20" height="20" patternUnits="userSpaceOnUse">
-            <path d="M20 0H0V20" fill="none" className="motif__grid" />
-          </pattern>
-        </defs>
-        <rect width="420" height="300" fill="url(#mgrid)" />
-        <path id="mpath" d="M40 80 H150 H270 H380" className="motif__line" />
-        <path d="M150 96 V190 H270" className="motif__line motif__line--branch" />
-        <circle r="4" className="motif__token">
-          <animateMotion dur="6s" repeatCount="indefinite" path="M40 80 H380" />
-        </circle>
-        {[
-          { x: 40, l: "INPUT", t: "message in" },
-          { x: 150, l: "AI", t: "understand" },
-          { x: 270, l: "INTEGRATION", t: "book slot" },
-          { x: 380, l: "NOTIFY", t: "confirm" },
-        ].map((n) => (
-          <g key={n.x} transform={`translate(${n.x} 80)`}>
-            <rect x="-34" y="-16" width="68" height="32" rx="5" className="motif__node" />
-            <text y="4" textAnchor="middle" className="motif__t">{n.t}</text>
-            <text y="-24" textAnchor="middle" className="motif__l">{n.l}</text>
-          </g>
-        ))}
-        <g transform="translate(270 190)">
-          <rect x="-46" y="-16" width="92" height="32" rx="5" className="motif__node motif__node--human" />
-          <text y="4" textAnchor="middle" className="motif__t">a person</text>
-          <text y="34" textAnchor="middle" className="motif__l motif__l--human">HUMAN HANDOFF</text>
-        </g>
-        <g transform="translate(150 150)">
-          <path d="M-6 -2 L0 -12 L6 -2 Z" className="motif__warn" />
-          <text x="12" y="-3" className="motif__l motif__l--exc">UNCLEAR?</text>
-        </g>
-      </svg>
-      <figcaption className="motif__cap mono">
-        fig. 01: the main path, plus where it hands over
-      </figcaption>
-    </figure>
   );
 }

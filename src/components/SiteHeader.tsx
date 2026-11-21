@@ -6,10 +6,22 @@ import { useEffect, useState } from "react";
 import { site } from "@/config/site";
 import { navItems } from "@/config/nav";
 import { ThemeToggle } from "./Theme";
+import { ArrowIcon } from "./icons";
+
+export function BrandMark({ size = 28 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 32 32" width={size} height={size} aria-hidden="true">
+      <rect x="2" y="2" width="13" height="13" rx="4" fill="currentColor" opacity="0.28" />
+      <rect x="17" y="17" width="13" height="13" rx="4" fill="currentColor" />
+      <path d="M15 8.5h4.5a4 4 0 0 1 4 4V17" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+    </svg>
+  );
+}
 
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => setOpen(false), [pathname]);
   useEffect(() => {
@@ -18,22 +30,23 @@ export function SiteHeader() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className={`site-header${open ? " is-open" : ""}`}>
-      <div className="container site-header__inner">
+    <header className={`site-header${open ? " is-open" : ""}${scrolled ? " is-scrolled" : ""}`}>
+      <div className="site-header__inner">
         <Link href="/" className="brand" aria-label={`${site.name}, home`}>
-          <span className="brand__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="22" height="22">
-              <rect x="2.5" y="2.5" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-              <rect x="14.5" y="14.5" width="7" height="7" rx="1.5" fill="currentColor" />
-              <path d="M9.5 6h5.5a3 3 0 0 1 3 3v5.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
-            </svg>
+          <span className="brand__mark">
+            <BrandMark />
           </span>
           <span className="brand__name">{site.name}</span>
-          <span className="brand__role mono">AI Automation Engineer</span>
         </Link>
 
         <nav aria-label="Main" className="nav" id="main-nav">
@@ -45,23 +58,18 @@ export function SiteHeader() {
                 </Link>
               </li>
             ))}
-            <li className="nav__cta-item">
-              <Link href={site.primaryCta.href} className="btn btn--primary btn--sm" aria-current={pathname === "/contact" ? "page" : undefined}>
-                Start a project
-              </Link>
-            </li>
           </ul>
+          <Link href={site.primaryCta.href} className="btn btn--primary nav__cta-mobile">
+            Start a project <ArrowIcon size={16} />
+          </Link>
         </nav>
 
         <div className="site-header__tools">
           <ThemeToggle />
-          <button
-            type="button"
-            className="menu-btn"
-            aria-expanded={open}
-            aria-controls="main-nav"
-            onClick={() => setOpen((o) => !o)}
-          >
+          <Link href={site.primaryCta.href} className="btn btn--primary btn--sm site-header__cta" aria-current={pathname === "/contact" ? "page" : undefined}>
+            Start a project
+          </Link>
+          <button type="button" className="menu-btn" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen((o) => !o)}>
             <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             <span className="menu-btn__bars" aria-hidden="true" />
           </button>

@@ -4,8 +4,8 @@
  * - Change email / X here and they update everywhere (nav CTA, footer, contact page, CTA blocks).
  * - calendarUrl: leave null until a real booking link exists. When set, a "Book a call"
  *   option appears automatically in every CTA block and on the contact page.
- * - formEndpoint: optional. If set (e.g. a Formspree / Netlify function / n8n webhook URL that
- *   accepts JSON POST), the contact form posts there. If null, the form opens a pre-filled email.
+ * - The contact form posts to /api/contact, which sends through Resend using the server-only
+ *   RESEND_API_KEY environment variable. Submissions go to contact.email below.
  */
 export const site = {
   name: "Hubroot",
@@ -18,11 +18,10 @@ export const site = {
     email: "adeshokanabdullahi@gmail.com",
     x: { handle: "@hubrootbuilds", url: "https://x.com/hubrootbuilds" },
     calendarUrl: null as string | null,
-    formEndpoint: null as string | null,
   },
   portrait: {
-    // One-file swap: drop a real photo at /public/images/hubroot-portrait.webp
-    src: "/images/hubroot-portrait.webp",
+    // First file that exists wins. Drop the photo at /public/me.jpg to replace the current one.
+    sources: ["/me.jpg", "/images/hubroot-portrait.webp"],
     alt: "Portrait of Hubroot",
   },
   primaryCta: {

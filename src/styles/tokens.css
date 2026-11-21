@@ -1,125 +1,179 @@
 /* ==========================================================================
-   DESIGN TOKENS · Operations Blueprint
-   Light is the default. Dark is tuned separately (warm charcoal, not inverted).
-   "system" tokens drive the control-room sections that stay dark in both themes.
+   DESIGN TOKENS · Hubroot
+   Visual language adapted from AmpliQ (Host Grotesk, tinted surfaces, pastel
+   aurora washes, deep showcase bands, pill controls), re-keyed to Hubroot:
+   midnight-indigo ink, electric cobalt accent, mint for "live / a person",
+   amber for "something went wrong". 4px grid throughout.
    ========================================================================== */
 
 :root {
   color-scheme: light;
 
-  /* surfaces */
-  --paper: #f5f2eb;
-  --surface: #ffffff;
-  --surface-2: #faf8f3;
-  --surface-sunk: #eeeae1;
+  /* ---- surfaces ---- */
+  --paper: #fbfbfe; /* page */
+  --band: #f3f4fd; /* alternate section band */
+  --surface: #ffffff; /* cards, windows */
+  --surface-2: #f6f7fe; /* inset areas inside cards */
+  --surface-sunk: #eceffb;
 
-  /* ink */
-  --ink: #16171a;
-  --ink-2: #45474d;
-  --ink-3: #66686e;
-  --ink-inverse: #f5f2eb;
+  /* ---- ink ---- */
+  --ink: #0c1445; /* headings + primary text */
+  --ink-2: #434a78; /* body copy */
+  --ink-3: #676d96; /* meta, captions */
+  --ink-inverse: #ffffff;
 
-  /* lines */
-  --line: #e2ddd2;
-  --line-strong: #cbc4b5;
+  /* ---- lines ---- */
+  --line: rgba(12, 20, 69, 0.08);
+  --line-strong: rgba(12, 20, 69, 0.16);
 
-  /* the one technical accent: blueprint blue */
-  --accent: #2443c2;
-  --accent-hover: #1b35a3;
+  /* ---- accent: electric cobalt ---- */
+  --accent: #3340f2;
+  --accent-hover: #2431d8;
   --accent-ink: #ffffff;
-  --accent-soft: #e8ecfa;
-  --accent-line: #b9c4ef;
+  --accent-soft: #edeeff;
+  --accent-line: #c9ccff;
 
-  /* semantic (always paired with icon + text, never colour alone) */
-  --exception: #a8481a;
-  --exception-soft: #f8eae0;
-  --exception-line: #e8c2a8;
-  --human: #1d6f52;
-  --human-soft: #e1f0e8;
-  --human-line: #b4d8c6;
-  --live: #1d6f52;
+  /* ---- semantic (always paired with a glyph + text, never colour alone) ---- */
+  --exception: #b35a00;
+  --exception-soft: #fff3e3;
+  --exception-line: #f5cf9f;
+  --human: #0b8a5c;
+  --human-soft: #e3f8ef;
+  --human-line: #a8e6cb;
+  --live: #0fa86f;
 
-  /* control-room / system view */
-  --sys-bg: #111317;
-  --sys-surface: #191c21;
-  --sys-surface-2: #20242a;
-  --sys-line: #2c3038;
-  --sys-ink: #ebe8e1;
-  --sys-ink-2: #a9acb3;
-  --sys-accent: #93a6ff;
-  --sys-exception: #f2a271;
-  --sys-human: #72d3a8;
-  --sys-grid: rgba(147, 166, 255, 0.06);
+  /* ---- tints for category cards (bg / icon) ---- */
+  --tint-indigo: #eef0ff;
+  --tint-indigo-ink: #3340f2;
+  --tint-mint: #e5f8f0;
+  --tint-mint-ink: #0b8a5c;
+  --tint-amber: #fff4e5;
+  --tint-amber-ink: #c26600;
+  --tint-sky: #e7f3ff;
+  --tint-sky-ink: #1f6fd1;
+  --tint-lilac: #f3ecff;
+  --tint-lilac-ink: #7a3be0;
 
-  /* type */
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: var(--font-instrument), "Iowan Old Style", Georgia, serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  /* ---- signature washes ---- */
+  --aurora: linear-gradient(140deg, #dcf7ec 0%, #dfeaff 30%, #e6e6ff 56%, #f0e8fd 78%, #fdf0e6 100%);
+  --showcase-bg: radial-gradient(110% 80% at 100% 100%, rgba(24, 190, 140, 0.22), rgba(24, 190, 140, 0) 55%),
+    radial-gradient(90% 75% at 0% 0%, rgba(64, 76, 255, 0.75), rgba(64, 76, 255, 0) 60%),
+    linear-gradient(150deg, #1b2290 0%, #0e1561 24%, #0a0f45 48%, #080c36 70%, #0b1550 100%);
 
-  --step--1: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
-  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
-  --step-1: clamp(1.125rem, 1.07rem + 0.3vw, 1.3125rem);
-  --step-2: clamp(1.375rem, 1.25rem + 0.6vw, 1.75rem);
-  --step-3: clamp(1.75rem, 1.5rem + 1.2vw, 2.5rem);
-  --step-4: clamp(2.25rem, 1.8rem + 2.2vw, 3.75rem);
-  --step-5: clamp(2.75rem, 2rem + 3.6vw, 5.25rem);
+  /* ---- showcase (deep band) palette: same in both themes ---- */
+  --sys-bg: #0a0f45;
+  --sys-surface: rgba(255, 255, 255, 0.06);
+  --sys-surface-2: rgba(255, 255, 255, 0.04);
+  --sys-line: rgba(255, 255, 255, 0.12);
+  --sys-ink: #ffffff;
+  --sys-ink-2: #c3c7ef;
+  --sys-ink-3: #9196c6;
+  --sys-accent: #9aa2ff;
+  --sys-exception: #ffb35c;
+  --sys-human: #52e3a8;
 
-  /* space + shape */
-  --gutter: clamp(16px, 4vw, 40px);
-  --section: clamp(72px, 10vw, 136px);
-  --radius-s: 4px;
-  --radius: 8px;
-  --radius-l: 12px;
-  --measure: 68ch;
-  --shadow-1: 0 1px 0 rgba(22, 23, 26, 0.04), 0 1px 2px rgba(22, 23, 26, 0.04);
-  --shadow-2: 0 1px 0 rgba(22, 23, 26, 0.04), 0 8px 24px -12px rgba(22, 23, 26, 0.18);
+  /* ---- type ---- */
+  --font-sans: var(--font-host), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* single typeface: "display" and "mono" roles are carried by weight, size and tracking */
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
 
-  /* motion */
+  --fs-xs: 0.75rem; /* 12 · eyebrows, meta */
+  --fs-sm: 0.875rem; /* 14 · UI, captions */
+  --fs-base: 1rem; /* 16 · body */
+  --fs-md: 1.0625rem; /* 17 · lede on mobile */
+  --step--1: var(--fs-sm);
+  --step-0: var(--fs-base);
+  --step-1: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem); /* 17 → 20 lede */
+  --step-2: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem); /* 20 → 24 card titles */
+  --step-3: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); /* 28 → 40 */
+  --step-4: clamp(2rem, 1.4rem + 2.6vw, 3.25rem); /* 32 → 52 section titles */
+  --step-5: clamp(2.5rem, 1.6rem + 3.9vw, 4.5rem); /* 40 → 72 page titles */
+
+  /* ---- space + shape (4px grid) ---- */
+  --gutter: clamp(16px, 4vw, 48px);
+  --section: clamp(64px, 9vw, 120px);
+  --radius-s: 8px;
+  --radius: 12px;
+  --radius-l: 20px;
+  --radius-xl: 28px;
+  --pill: 999px;
+  --measure: 66ch;
+
+  --shadow-1: 0 1px 2px rgba(12, 20, 69, 0.04), 0 8px 24px rgba(12, 20, 69, 0.06);
+  --shadow-2: 0 2px 6px rgba(12, 20, 69, 0.04), 0 16px 36px rgba(12, 20, 69, 0.1);
+  --shadow-3: 0 2px 6px rgba(12, 20, 69, 0.05), 0 28px 64px rgba(12, 20, 69, 0.16);
+  --shadow-accent: 0 12px 28px rgba(51, 64, 242, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.24);
+
+  /* ---- motion ---- */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --t-fast: 150ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 120ms;
   --t: 240ms;
   --t-slow: 520ms;
 
   --focus: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent);
+
+  /* header glass */
+  --nav-bg: rgba(251, 251, 254, 0.72);
+  --nav-edge: rgba(255, 255, 255, 0.6);
 }
 
-/* Dark: tuned, not inverted. Warm charcoal paper, slightly lifted surfaces. */
+/* Dark: not an inversion. Night-indigo paper, lifted indigo surfaces, softer accent. */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --paper: #121314;
-  --surface: #191a1c;
-  --surface-2: #1d1e21;
-  --surface-sunk: #0e0f10;
+  --paper: #070b26;
+  --band: #0a1031;
+  --surface: #0f163d;
+  --surface-2: #131b48;
+  --surface-sunk: #060920;
 
-  --ink: #ece9e2;
-  --ink-2: #bcb9b1;
-  --ink-3: #94918a;
-  --ink-inverse: #16171a;
+  --ink: #eef0ff;
+  --ink-2: #b9bee2;
+  --ink-3: #8c92bd;
+  --ink-inverse: #070b26;
 
-  --line: #2a2b2f;
-  --line-strong: #3a3b40;
+  --line: rgba(238, 240, 255, 0.09);
+  --line-strong: rgba(238, 240, 255, 0.18);
 
-  --accent: #93a6ff;
-  --accent-hover: #b0beff;
-  --accent-ink: #0f1220;
-  --accent-soft: rgba(147, 166, 255, 0.12);
-  --accent-line: rgba(147, 166, 255, 0.35);
+  --accent: #8f97ff;
+  --accent-hover: #aeb4ff;
+  --accent-ink: #0a0f45;
+  --accent-soft: rgba(143, 151, 255, 0.14);
+  --accent-line: rgba(143, 151, 255, 0.38);
 
-  --exception: #f2a271;
-  --exception-soft: rgba(242, 162, 113, 0.1);
-  --exception-line: rgba(242, 162, 113, 0.35);
-  --human: #72d3a8;
-  --human-soft: rgba(114, 211, 168, 0.1);
-  --human-line: rgba(114, 211, 168, 0.32);
-  --live: #72d3a8;
+  --exception: #ffb35c;
+  --exception-soft: rgba(255, 179, 92, 0.1);
+  --exception-line: rgba(255, 179, 92, 0.34);
+  --human: #52e3a8;
+  --human-soft: rgba(82, 227, 168, 0.1);
+  --human-line: rgba(82, 227, 168, 0.32);
+  --live: #52e3a8;
 
-  --sys-bg: #0b0c0e;
-  --sys-surface: #141619;
-  --sys-surface-2: #1a1d21;
-  --sys-line: #262a31;
-  --sys-grid: rgba(147, 166, 255, 0.07);
+  --tint-indigo: rgba(143, 151, 255, 0.1);
+  --tint-indigo-ink: #a5acff;
+  --tint-mint: rgba(82, 227, 168, 0.09);
+  --tint-mint-ink: #52e3a8;
+  --tint-amber: rgba(255, 179, 92, 0.09);
+  --tint-amber-ink: #ffb35c;
+  --tint-sky: rgba(110, 180, 255, 0.09);
+  --tint-sky-ink: #8cc4ff;
+  --tint-lilac: rgba(190, 150, 255, 0.1);
+  --tint-lilac-ink: #c8a8ff;
 
-  --shadow-1: 0 0 0 1px rgba(255, 255, 255, 0.02);
-  --shadow-2: 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+  --aurora: radial-gradient(70% 90% at 0% 0%, rgba(64, 76, 255, 0.34), rgba(64, 76, 255, 0) 70%),
+    radial-gradient(60% 80% at 100% 100%, rgba(24, 190, 140, 0.16), rgba(24, 190, 140, 0) 70%),
+    linear-gradient(140deg, #0b1140 0%, #080d30 60%, #070b26 100%);
+
+  --shadow-1: 0 0 0 1px rgba(255, 255, 255, 0.02), 0 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-2: 0 0 0 1px rgba(255, 255, 255, 0.03), 0 16px 36px rgba(0, 0, 0, 0.4);
+  --shadow-3: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 28px 64px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 12px 28px rgba(143, 151, 255, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  --nav-bg: rgba(7, 11, 38, 0.72);
+  --nav-edge: rgba(255, 255, 255, 0.06);
+
+  /* black brand marks (Next.js, ElevenLabs…) switch to the text colour */
+  --brand-dark: currentColor;
 }

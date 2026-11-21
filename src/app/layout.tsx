@@ -1,17 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/config/site";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { MotionProvider } from "@/components/MotionProvider";
+import { RevealObserver } from "@/components/Reveal";
 import { themeInitScript } from "@/components/Theme";
 import "@/styles/tokens.css";
 import "@/styles/base.css";
 import "@/styles/components.css";
 
-const sans = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
-const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
-const display = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument", display: "swap" });
+/** Host Grotesk, self-hosted. The single typeface for the whole site. */
+const host = localFont({
+  src: [
+    { path: "../fonts/HostGrotesk-Regular.ttf", weight: "400", style: "normal" },
+    { path: "../fonts/HostGrotesk-Medium.ttf", weight: "500", style: "normal" },
+    { path: "../fonts/HostGrotesk-SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../fonts/HostGrotesk-Bold.ttf", weight: "700", style: "normal" },
+  ],
+  variable: "--font-host",
+  display: "swap",
+  fallback: ["ui-sans-serif", "system-ui", "Segoe UI", "sans-serif"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -23,14 +33,14 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f2eb" },
-    { media: "(prefers-color-scheme: dark)", color: "#121314" },
+    { media: "(prefers-color-scheme: light)", color: "#fbfbfe" },
+    { media: "(prefers-color-scheme: dark)", color: "#070b26" },
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="light" className={`${sans.variable} ${mono.variable} ${display.variable}`} suppressHydrationWarning>
+    <html lang="en" data-theme="light" className={host.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
@@ -43,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main id="main">{children}</main>
           <SiteFooter />
         </MotionProvider>
+        <RevealObserver />
       </body>
     </html>
   );

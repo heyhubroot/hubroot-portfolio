@@ -27,13 +27,16 @@ Before deploying, set `site.url` in `src/config/site.ts` to the real domain.
 
 | What | Where |
 | --- | --- |
-| Email, X, calendar URL, form endpoint | `src/config/site.ts` |
+| Email, X, calendar URL | `src/config/site.ts` |
+| Contact form validation (shared client/server) | `src/lib/contact.ts` |
+| Contact form email sending (Resend) | `src/app/api/contact/route.ts` |
 | Projects / case studies | `src/data/projects.ts` |
 | Services | `src/data/services.ts` |
 | Process steps, FAQ, problem list, reliability principles | `src/data/content.ts` |
 | Tool names | `src/data/tools.ts` |
 | Design tokens (light + dark + control-room) | `src/styles/tokens.css` |
-| Portrait | `public/images/hubroot-portrait.webp` |
+| Portrait | `public/me.jpg` (falls back to `public/images/hubroot-portrait.webp`) |
+| Font (Host Grotesk, self-hosted) | `src/fonts/` |
 | Project screenshots | `public/images/projects/<slug>/` |
 | Project videos | `public/videos/projects/<slug>/` |
 | Original/unoptimised source images | `assets-source/` (not served) |
@@ -41,7 +44,7 @@ Before deploying, set `site.url` in `src/config/site.ts` to the real domain.
 
 ## Portrait
 
-Drop a real photo at `public/images/hubroot-portrait.webp` (portrait orientation, ~1200×1500, natural expression, clean background) and rebuild. The placeholder disappears automatically; no code change.
+Drop the photo at `public/me.jpg` and rebuild. It is used first; if it is missing, `public/images/hubroot-portrait.webp` is used. The photo fills a 4:5 frame with `object-fit: cover`, so it is cropped, never stretched. No code change needed.
 
 ## Add a project
 
@@ -72,4 +75,10 @@ Set `calendarUrl` in `src/config/site.ts`. A "Book a call" option then appears i
 
 ## Contact form
 
-With `formEndpoint: null` the form opens the visitor's email app pre-filled (works with zero backend). To receive submissions directly, set `formEndpoint` to any URL that accepts a JSON POST (Formspree, a Netlify Function, an n8n webhook).
+The form posts to `/api/contact`, which validates and sanitises everything again on the server, then sends it with Resend:
+
+- needs the `RESEND_API_KEY` environment variable (server only; never exposed to the browser)
+- sends to the email in `src/config/site.ts`, from `Portfolio <onboarding@resend.dev>`, with reply-to set to the visitor
+- with the `onboarding@resend.dev` sender, Resend only delivers to the email address that owns the Resend account; verify a domain in Resend to send from your own address
+
+If sending fails for any reason (key missing, Resend down, rate limit), the visitor sees an error plus a pre-filled email link, so nothing they typed is lost. Locally, put the key in `.env.local` (git-ignored) to test real sending.
