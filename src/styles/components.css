@@ -4138,8 +4138,14 @@
   opacity: 0;
   transform: translateY(-0.45em);
   filter: blur(6px);
+  color: var(--rot, inherit);
   transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), filter 0.45s var(--ease);
 }
+.rotator__item:nth-child(5n + 1) { --rot: var(--rot-1); }
+.rotator__item:nth-child(5n + 2) { --rot: var(--rot-2); }
+.rotator__item:nth-child(5n + 3) { --rot: var(--rot-3); }
+.rotator__item:nth-child(5n + 4) { --rot: var(--rot-4); }
+.rotator__item:nth-child(5n + 5) { --rot: var(--rot-5); }
 .rotator__item.is-on {
   opacity: 1;
   transform: none;
@@ -4154,7 +4160,7 @@
   bottom: 0.02em;
   height: 0.09em;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--live) 55%, transparent);
+  background: color-mix(in srgb, currentColor 38%, transparent);
   transform-origin: left;
   animation: hb-rotate-mark 0.9s var(--ease-out) 0.25s both;
 }

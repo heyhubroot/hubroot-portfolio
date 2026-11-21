@@ -54,6 +54,13 @@
   --tint-lilac: #f3ecff;
   --tint-lilac-ink: #7a3be0;
 
+  /* ---- hero rotating phrases: one accent each, drawn from the tint family ---- */
+  --rot-1: #0b6a86; /* copy-paste  · deep teal */
+  --rot-2: #6a36d4; /* memory      · violet */
+  --rot-3: #a14a06; /* overtime    · burnt amber */
+  --rot-4: #0a6f4d; /* guesswork   · deep green */
+  --rot-5: #a12f78; /* one person  · plum */
+
   /* ---- signature washes ---- */
   --aurora: linear-gradient(140deg, #dcf7ec 0%, #dfeaff 30%, #e6e6ff 56%, #f0e8fd 78%, #fdf0e6 100%);
   --showcase-bg: radial-gradient(110% 80% at 100% 100%, rgba(24, 190, 140, 0.22), rgba(24, 190, 140, 0) 55%),
@@ -161,6 +168,12 @@
   --tint-sky-ink: #8cc4ff;
   --tint-lilac: rgba(190, 150, 255, 0.1);
   --tint-lilac-ink: #c8a8ff;
+
+  --rot-1: #6fd0ea;
+  --rot-2: #bca4ff;
+  --rot-3: #ffb866;
+  --rot-4: #62dfae;
+  --rot-5: #f29ccf;
 
   --aurora: radial-gradient(70% 90% at 0% 0%, rgba(64, 76, 255, 0.34), rgba(64, 76, 255, 0) 70%),
     radial-gradient(60% 80% at 100% 100%, rgba(24, 190, 140, 0.16), rgba(24, 190, 140, 0) 70%),
